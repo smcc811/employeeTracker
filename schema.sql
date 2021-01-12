@@ -1,0 +1,29 @@
+DROP DATABASE IF EXISTS employee_tracker;
+CREATE DATABASE employee_tracker;
+USE employee_tracker;
+
+CREATE TABLE department (
+id INTEGER(11) AUTO_INCREMENT NOT NULL,
+name VARCHAR(100) NOT NULL,
+PRIMARY KEY (id)
+);
+
+CREATE TABLE role (
+id INTEGER(11) AUTO_INCREMENT NOT NULL,
+title VARCHAR(100) NOT NULL,
+salary DECIMAL NOT NULL,
+department_id INTEGER NOT NULL,
+FOREIGN KEY (department_id) REFERENCES department(id),
+PRIMARY KEY (id)
+);
+
+CREATE TABLE employee (
+id INTEGER(11) AUTO_INCREMENT NOT NULL,
+firstName VARCHAR(100) NOT NULL,
+lastName VARCHAR(100) NOT NULL,
+role_id INTEGER NOT NULL,
+FOREIGN KEY (role_id) REFERENCES role(id),
+manager_id INTEGER NOT NULL,
+FOREIGN KEY (manager_id) REFERENCES employee(id),
+PRIMARY KEY (id)
+);
